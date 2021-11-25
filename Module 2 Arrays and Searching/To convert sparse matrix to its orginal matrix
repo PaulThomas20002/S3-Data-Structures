@@ -1,3 +1,22 @@
+/*This is from Paul Thomas Just A Computer Lover*/
+#include <stdio.h>
+#define MAX 20
+
+void read_matrix(int a[10][10], int row, int column);  //function prototype
+void print_sparse(int b[MAX][3]);
+void create_sparse(int a[10][10], int row, int column, int b[MAX][3]);
+
+int main()
+{
+    int a[10][10], b[MAX][3], row, column;
+    printf("\nEnter the size of matrix (m x n): ");
+    scanf("%d%d", &row, &column);
+
+    read_matrix(a, row, column);
+    create_sparse(a, row, column, b);
+    print_sparse(b);
+    return 0;
+}
 void read_matrix(int a[10][10], int row, int column)
 {
     int i, j;
