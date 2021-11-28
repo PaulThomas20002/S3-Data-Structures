@@ -1,113 +1,117 @@
-/* logical error found, not completed */
-
-
 #include<stdio.h>
 #include<stdlib.h>
-int main()
+#define MAX 10
 
-{
-int i=1,j=1,k=1,m ,n, a[10][3], b[10][3] , c[10][3];
-
-printf("Enter the num of rows of matrix A");
-scanf("%d", &m);
-printf("Enter the matrix A");
-for(i=0; i<m;i++)
-	for(j=0;j<3;j++)
-	    {
-		    scanf("%d", &a[i][j]);
-		}
-printf("Enter the num of rows of matrix B");
-scanf("%d", &n);
-printf("Enter the matrix B");
-for(i=0; i<n;i++)
-	for(j=0;j<3;j++)
-	    {
-		    scanf("%d", &b[i][j]);
-		}
-
-
-if( a[0][0] == b[0][0] && a[0][1] == b[0][1] )
-{
-	while(i<m && j<n)
-	{
-		if(a[i][0]==b[j][0] && a[i][1]==b[j][1])
-		{
-
-			c[k][0]=a[i][0];
-			c[k][1]=a[i][1];
-			c[k][2]=a[i][2]+b[i][2];
-			i++;j++;k++;
-		}
-		else if( a[i][0]==b[j][0])
-		   {
-			
-			if(a[i][1]<b[j][1])
-			    {
-				c[k][0]=a[i][0];
-				c[k][1]=a[i][1];
-			    c[k][2]=a[i][2];
-				i++;k++;
-				}
-			else{
-				c[k][0]=b[j][0];
-				c[k][1]=b[j][1];
-			    c[k][2]=b[j][2];
-				j++;k++;
-				}
-			}
-					
-		else
-		{
-			if(a[i][0]<b[j][0])
-			{
-				c[k][0]=a[i][0];
-				c[k][1]=a[i][1];
-			    c[k][2]=a[i][2];
-				i++;k++;
-				
-			}
-			else{
-			    c[k][0]=b[j][0];
-				c[k][1]=b[j][1];
-			    c[k][2]=b[j][2];
-				j++;k++;
-			    
-			}
-		}
-		while(i<m)
-		{
-		c[k][0]=a[i][0];
-		c[k][1]=a[i][1];
-		c[k][2]=a[i][2];
-		i++;k++;
-		}
-	    while(j<n)
-	    {
-		c[k][0]=b[j][0];
-		c[k][1]=b[j][1];
-		c[k][2]=b[j][2];
-		j++;k++;
-		}
-		
-	c[0][0]=a[0][0];
-	c[0][1]=a[0][1];
-	c[0][2]=k-1;
-	}
+void printsparse(int b[MAX][3]);
+void readsparse(int b[MAX][3]);
+void addsparse(int b1[MAX][3],int b2[MAX][3],int b3[MAX][3]);
+void main(){
+   
+int b1[10][3],b2[10][3],b3[10][3];
+readsparse(b1);
+readsparse(b2);
+addsparse(b1,b2,b3);
+printsparse(b3);
 
 }
-else
-    {
-        printf("\nADDITION NOT POSSIBLE");
-        exit(0);
-    }
-       
 
-printf("The matrix A+B");
-printf("\nrow\tcolumn\tvalue\n");
-for(i=0; i<k; i++)
-	
-	    {
-		    printf("\n %d \t %d \t %d", c[i][0], c[i][1], c[i][2]);
-		}
-		return 0;
+void readsparse(int b[10][3]){
+   
+int i,t,m,n;
+printf("\nEnter no. of rows and column : ");
+scanf("%d%d", &m, &n);
+printf("No. of non-zero triples:");
+scanf("%d", &t);
+   
+b[0][0]=m;
+b[0][1]=n;
+b[0][2]=t;
+for(i=1;i<=t;i++){
+printf("Enter the triples(row,column,value):");
+scanf(" %d %d %d", &b[i][0], &b[i][1], &b[i][2]);
+                }
+}
+
+
+void addsparse(int b1[10][3],int b2[10][3],int b3[10][3]){
+int t1,t2,i,j,k;
+if( b1[0][0] != b2[0][0] || b1[0][1] != b2[0][1] ){
+printf("\nYou have entered invalid matrix!!Size must be equal");
+exit(0);
+}
+t1=b1[0][2];
+t2=b2[0][2];
+i=j=k=0;
+b3[0][0]=b1[0][0];
+b3[0][1]=b1[0][1];
+   
+while(i<=t1 && j<=t2)
+{
+       
+if(b1[i][0]<b2[j][0])   
+       {
+        b3[k][0]=b1[i][0];
+        b3[k][1]=b1[i][1];
+        b3[k][2]=b1[i][2];
+        k++;i++;
+       }
+       
+else if(b2[j][0]<b1[i][0])  
+       {
+        b3[k][0]=b2[j][0];
+        b3[k][1]=b2[j][1];
+        b3[k][2]=b2[j][2];
+        k++;j++;
+       }
+       
+else if(b1[i][1]<b2[j][1])     
+       {
+        b3[k][0]=b1[i][0];
+        b3[k][1]=b1[i][1];
+        b3[k][2]=b1[i][2];
+        k++;i++;
+        }
+else if(b2[j][1]<b1[i][1])      
+       {
+        b3[k][0]=b2[j][0];
+        b3[k][1]=b2[j][1];
+        b3[k][2]=b2[j][2];
+        k++;j++;
+       }
+else{
+           
+b3[k][0]=b1[i][0];     
+b3[k][1]=b1[i][1];
+b3[k][2]=b1[i][2]+b2[j][2];
+k++;i++;j++;
+    }
+}
+   
+while(i<=t1)       
+{
+    b3[k][0]=b1[i][0];
+    b3[k][1]=b1[i][1];
+    b3[k][2]=b1[i][2];
+    i++;k++;
+    }
+   
+while(j<=t2)       
+{
+    b3[k][0]=b2[j][0];
+    b3[k][1]=b1[j][1];
+    b3[k][2]=b1[j][2];
+    j++;k++;
+    }
+b3[0][2]=k-1;      
+}
+void printsparse(int b[10][3])
+{
+int i,t;
+t=b[0][2];
+printf("\nrow\tcolumn\tvalue");
+for(i=0;i<=t;i++)
+    {
+      printf("\n %d \t %d \t %d", b[i][0], b[i][1], b[i][2]);
+    }
+
 }
