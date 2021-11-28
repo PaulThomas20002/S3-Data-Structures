@@ -51,7 +51,6 @@ k=1;
 n=b1[0][2];
 for(i=0;i<b1[0][1];i++)
 for(j=1;j<=n;j++)
-//if a column number of current triple==i then insert the current triple in b2
 if(i==b1[j][1])
 {
 b2[k][0]=i;
