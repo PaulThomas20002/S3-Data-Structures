@@ -1,5 +1,5 @@
 /*
-algorithm for binary sort
+algorithm for binary search
 step 1: start
 step 2: accept a value in max as the number of elements of the array
 step 3: accept max elements into the array ar
