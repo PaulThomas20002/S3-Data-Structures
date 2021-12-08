@@ -1,3 +1,4 @@
+//Menu driven program for linear and binary search
 #include <stdio.h>
 #include<stdlib.h>
 void linear(int a[10], int n){
