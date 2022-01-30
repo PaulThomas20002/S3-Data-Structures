@@ -105,7 +105,6 @@ void insertAtPosition()
 		newnode->next->prev = newnode;
 		newnode->prev = NULL;
 		start = newnode; */
-	// now this is improved by Jay Ghughriwala on geeksforgeeks
 	insertAtFront();
 	}
 
